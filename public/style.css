@@ -1,0 +1,362 @@
+ * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+      padding: 20px 0;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    header p {
+      font-size: 1.1em;
+      opacity: 0.95;
+    }
+
+    .main-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .panel {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .panel h2 {
+      margin-bottom: 15px;
+      color: #667eea;
+      font-size: 1.5em;
+    }
+
+    textarea {
+      width: 100%;
+      height: 400px;
+      padding: 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 5px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      resize: vertical;
+      transition: border-color 0.3s;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    button {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-secondary {
+      background: #f0f0f0;
+      color: #333;
+      border: 2px solid #e0e0e0;
+    }
+
+    .btn-secondary:hover {
+      background: #e0e0e0;
+    }
+
+    .status {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .status.loading {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+
+    .char-count {
+      font-size: 12px;
+      color: #999;
+      margin-top: 5px;
+    }
+
+    .features {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      margin-bottom: 30px;
+    }
+
+    .features ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .features li {
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+    }
+
+    .features li:last-child {
+      border-bottom: none;
+    }
+
+    .features li::before {
+      content: "✓";
+      color: #667eea;
+      font-weight: bold;
+      margin-right: 10px;
+      font-size: 18px;
+    }
+
+    .output-panel {
+      max-height: 400px;
+      overflow-y: auto;
+      background: #f5f5f5;
+      border-radius: 5px;
+      padding: 15px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .output-panel.empty {
+      color: #999;
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 15px;
+      }
+
+      .panels {
+        flex-direction: column;
+      }
+
+      textarea {
+        height: 250px;
+      }
+
+      button {
+        padding: 10px 15px;
+        font-size: 14px;
+      }
+
+      .header h1 {
+        font-size: 2em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>AI Text Tool</h1>
+      <p>Transform your text with powerful AI capabilities</p>
+    </div>
+
+    <div class="features">
+      <h2>Features</h2>
+      <ul>
+        <li>Summarize long texts into concise summaries</li>
+        <li>Enhance your writing with improved grammar and style</li>
+        <li>Generate creative content ideas and expansions</li>
+        <li>Translate text to multiple languages</li>
+        <li>Extract key points and insights from documents</li>
+      </ul>
+    </div>
+
+    <div class="panels">
+      <div class="panel">
+        <h2>Input</h2>
+        <textarea id="inputText" placeholder="Enter your text here..."></textarea>
+        <div class="char-count">
+          <span id="charCount">0</span> characters
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Output</h2>
+        <div class="output-panel empty" id="outputPanel">
+          Output will appear here...
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Actions</h2>
+      <div class="button-group">
+        <button class="btn-primary" onclick="summarizeText()">Summarize</button>
+        <button class="btn-primary" onclick="improveText()">Improve</button>
+        <button class="btn-primary" onclick="generateIdeas()">Generate Ideas</button>
+        <button class="btn-secondary" onclick="clearAll()">Clear</button>
+      </div>
+      <div id="status"></div>
+    </div>
+  </div>
+
+  <script>
+    const inputText = document.getElementById('inputText');
+    const outputPanel = document.getElementById('outputPanel');
+    const charCount = document.getElementById('charCount');
+    const statusDiv = document.getElementById('status');
+
+    // Update character count
+    inputText.addEventListener('input', () => {
+      charCount.textContent = inputText.value.length;
+    });
+
+    function showStatus(message, type) {
+      statusDiv.className = `status ${type}`;
+      statusDiv.textContent = message;
+      if (type !== 'loading') {
+        setTimeout(() => {
+          statusDiv.className = '';
+          statusDiv.textContent = '';
+        }, 5000);
+      }
+    }
+
+    function displayOutput(text) {
+      outputPanel.textContent = text;
+      outputPanel.classList.remove('empty');
+    }
+
+    async function callAI(action, text) {
+      if (!text.trim()) {
+        showStatus('Please enter some text first', 'error');
+        return;
+      }
+
+      showStatus('Processing...', 'loading');
+
+      const prompts = {
+        summarize: `Summarize the following text concisely:\n\n${text}`,
+        improve: `Improve the following text by enhancing grammar, clarity, and style:\n\n${text}`,
+        generateIdeas: `Generate 5 creative ideas or expansions based on this text:\n\n${text}`
+      };
+
+      try {
+        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer YOUR_OPENAI_API_KEY`
+          },
+          body: JSON.stringify({
+            model: 'gpt-3.5-turbo',
+            messages: [
+              {
+                role: 'user',
+                content: prompts[action]
+              }
+            ],
+            temperature: 0.7,
+            max_tokens: 1000
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('API request failed');
+        }
+
+        const data = await response.json();
+        const result = data.choices[0].message.content;
+        displayOutput(result);
+        showStatus('Success! Your text has been processed.', 'success');
+      } catch (error) {
+        showStatus('Error processing text. Please check your API key and try again.', 'error');
+        console.error('Error:', error);
+      }
+    }
+
+    function summarizeText() {
+      callAI('summarize', inputText.value);
+    }
+
+    function improveText() {
+      callAI('improve', inputText.value);
+    }
+
+    function generateIdeas() {
+      callAI('generateIdeas', inputText.value);
+    }
+
+    function clearAll() {
+      inputText.value = '';
+      outputPanel.textContent = 'Output will appear here...';
+      outputPanel.classList.add('empty');
+      charCount.textContent = '0';
+      statusDiv.className = '';
+      statusDiv.textContent = '';
+    }
+  </script>
+</body>
+</html>
